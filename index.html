@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Widget Board</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="#">Widget Board</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+        <button type="button" class="btn btn-base" name="toDo">To Do List</button>
+        <button type="button" class="btn btn-base" name="APOD">Pic of the Day</button>
+        <button type="button" class="btn btn-base" name="clock">Clock</button>
+        <button type="button" class="btn btn-base" name="game">Game</button>
+        <button type="button" class="btn btn-base" name="calculator">Calculator</button>
+  </div>
+</nav>
+  <div class="container-fluid">
+  <div class="controls">
+    <label for="spacing">Border:</label>
+    <input id="spacing" type="range" name="spacing" min="1" max="15" value="0" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#baccd8">
+
+    <label for="textColor">Text Color</label>
+    <input id="base" type="color" name="textColor" value="#555555">
+  </div>
+
+
+  <div id='title' draggable="true" style="position: absolute; left: 50px; top: 130px; z-index: 5; width: 500px; height: 43px;" class="widget">
+    <div class="wrapper" style="position: relative;">
+      <input name="titleText" style="width: 100%;" type="text" placeholder="Type Your Title Here"/>
+    </div>
+  </div>
+
+
+
+<div id='APOD' draggable="true" style="position: absolute; left: 340px; top: 230px; z-index: 5;" class="widget hidden">
+  <div class="wrapper" style="position: relative;">
+    <h2>NASA Picture </br>
+      of the Day</h2>
+    <div id="apod-pic"></div>
+    <label for="myDate">Pic of the Day for:</label>
+    <input id="myDate" type="date" value="" />
+  </div>
+</div>
+
+
+<div id='toDo' draggable="true" style="position: absolute; left: 50px; top: 230px; z-index: 5;" class="widget hidden">
+  <div class="wrapper" style="position: relative;">
+    <h2>To Do List</h2>
+    <p></p>
+    <div style="height: 260px; overflow:auto">
+      <ul class="toDoItem">
+        <li>Loading Items...</li>
+      </ul>
+    </div>
+    <form class="add-items">
+      <input type="text" name="item" placeholder="Item To Do" required autocomplete="off"> 
+      <input type="submit" value="+ Add Item">
+    </form>
+  </div>
+</div>
+
+
+<!-- Clock -->
+<div id='clock' draggable="true" style="position: absolute; left: 340px; top: 640px; z-index: 5;" class="widget hidden">
+  <div class="wrapper" style="position: relative;">
+    <h2>Clock</h2>
+    <div class="clockbox">
+        <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 600 600">
+            <g id="face">
+                <circle class="circle" cx="300" cy="300" r="253.9"/>
+                <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
+                <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
+            </g>
+            <g id="hour">
+                <path class="hour-arm" d="M300.5 298V142"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+            <g id="minute">
+                <path class="minute-arm" d="M300.5 298V67"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+            <g id="second">
+                <path class="second-arm" d="M300.5 350V55"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+        </svg>
+    </div><!-- .clockbox -->
+  </div>
+</div>
+
+
+<!-- Game -->
+<div id='game' draggable="true" style="position: absolute; left: 630px; top: 230px; z-index: 5;" class="widget hidden">
+  <div class="wrapper" style="position: relative;">
+    <h2>Game</h2>
+    <canvas id="myCanvas" width="300" height="200" style="background-color: #fff;"></canvas>
+  </div>
+</div>
+
+
+<!-- Calculator -->
+<div id='calculator' draggable="true" style="position: absolute; left: 50px; top: 640px; z-index: 5;" class="widget hidden">
+  <div class="wrapper" style="position: relative;">
+    <h2>Calculator</h2>
+    <div id="calculatorDiv">
+      <form name="calc">
+        <input type="text" id='calcDisplay' style="width: 247px; margin-bottom:5px; background-color: rgba(256, 256, 256, .7)" disabled/>
+
+      <table>
+        <tr>
+          <td><input id="clear" type="button" value="C" class="calcKey" /></td>
+          <td><input id="backspace" type="button" value="&#x1f519;" class="calcKey" /></td>
+          <td><input id="sqrt" type="button" value="&#x221a;" class="calcKey" /></td>
+          <td><input type="button" value="/" class="calcKey number" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="7" class="calcKey number" /></td>
+          <td><input type="button" value="8" class="calcKey number" /></td>
+          <td><input type="button" value="9" class="calcKey number" /></td>
+          <td><input type="button" value="*" class="calcKey number" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="4" class="calcKey number" /></td>
+          <td><input type="button" value="5" class="calcKey number" /></td>
+          <td><input type="button" value="6" class="calcKey number" /></td>
+          <td><input type="button" value="-" class="calcKey number" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="1" class="calcKey number" /></td>
+          <td><input type="button" value="2" class="calcKey number" /></td>
+          <td><input type="button" value="3" class="calcKey number" /></td>
+          <td><input type="button" value="+" class="calcKey number" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="button" value="0" class="calcKey number" /></td>
+          <td><input type="button" value="." class="calcKey number" /></td>
+          <td><input id="answer" type="button" value="=" class="calcKey" /></td>
+        </tr>
+      </table>
+      </form>
+    </div>
+  </div>
+</div> <!-- close calculator -->
+
+</div> <!-- close container -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
